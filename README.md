@@ -1,1 +1,1 @@
-# remotejobs21
+Django Crud app for looking for remote jobs

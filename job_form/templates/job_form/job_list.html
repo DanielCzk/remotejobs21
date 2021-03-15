@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+
+<br>
+<div class="container-fluid">
+<div class="table-responsive">
+<table class="table table-striped">
+	<thead class="thead-dark">
+	
+            <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Job title</th>
+                  <th scope="col">Job describtion</th>
+                  <th scope="col">Salary</th>       
+                  <th scope="col">Job requirements</th>
+                  <th scope="col">Contract</th>
+                  <th scope="col">Experience</th>
+                  <th scope="col">Area</th>
+                  <th scope="col">
+                  <div class="btn-group" role="group" aria-label="Basic example">
+                     <a href="{% url 'job-create' %}" class="btn btn-success">Add new</a>    
+                     <a href="{% url 'company-data' %}" class="btn btn-info">Data</a></th>
+                  </div>
+                  </th>
+     
+            </tr>
+
+	</thead>
+
+	<tbody>
+		{% for work in job_company_offers %}
+            <tr>
+            	<td>{{ forloop.counter }}</td>
+            	<td><a href="{% url 'job-detail' work.id %}"/>{{work.title}}</a></td>
+            	<td>{{work.job_desc}}</td>
+            	<td>{{work.min_salary}} / {{work.max_salary}} {{ work.salary_type }}</td>
+                  <td>{{work.requirements}}</td>
+                  <td>{{work.contract_type}}</td>
+                  <td>{{work.experience_type}}</td>
+                  <td>{{work.area_type}}</td>
+            	<td>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                        <a href="{% url 'job-update' work.id %}" class="btn btn-success">
+                        Update
+                        </a>
+                  		<form action="{% url 'job-delete' work.id %}" method="POST" class="d-inline">
+                  			{% csrf_token %}
+                  			<button type="submit" class="btn btn-danger">
+                  				Delete
+                  			</button>
+                  		</form>
+                        </div>
+            	</td>
+                 
+              
+
+            </tr>
+		{% endfor %}
+
+	</tbody>
+</table>
+</div>
+</div>
+
+
+{% endblock content %}

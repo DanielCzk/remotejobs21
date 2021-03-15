@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-fluid">
+	<br>
+<div class="card">
+  <h4 class="card-header">
+	{{job_list_detail.title}}
+  </h4>
+  <div class="card-body">
+	<h5 class="card-title">Job describtion: </h5>
+	<p class="card-text lead">{{job_list_detail.job_desc}}</p>
+	<hr>
+	<h5 class="card-title">Salary:</h5>
+		<p class="card-text lead">
+			{% if job_list_detail.min_salary == None %}
+				<strong>Not specified</strong>
+			{% else %}
+				
+				{{job_list_detail.min_salary}} - {{job_list_detail.max_salary}} {{job_list_detail.salary_type}}
+			{% endif %}
+		</p>
+	<hr>
+	<h5 class="card-title">Requirements:</h5>
+	<p class="card-text lead">{{job_list_detail.requirements}}</p>
+	<hr>
+	<br>
+	<h5 class="card-title">Contract type:</h5>
+	<p class="card-text lead">{{job_list_detail.contract_type}}</p>
+	<hr>
+	<br>
+	<h5 class="card-title">Experience:</h5>
+	<p class="card-text lead">{{job_list_detail.experience_type}}</p>
+	<hr>
+	<br>
+	<h5 class="card-title">Area:</h5>
+	<p class="card-text lead">{{job_list_detail.area_type}}</p>
+	<hr>
+	<br>
+ <img src="{{ object.image_url|default_if_none:'#' }}" />       
+	
+	<a href="#applyCollapse" class="btn btn-success btn-lg" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="applyCollapse">Apply</a><br><br>
+
+	<div class="collapse" id="applyCollapse">
+		<div class="card card-body">
+		<p>Please send your application to: <strong>{{job_list_detail.user.email}}</strong></p>
+	</div>
+
+</div>
+
+
+  </div>
+  	<div class="card-footer text-muted text-center">
+
+		{% if job_list_detail.added_by.company_name == None %}
+				<p>See other jobs offers from a <a href="{% url 'job-list-user' job_list_detail.user_id %}">Company</a></p>
+		{% else %}
+
+		<p>See other jobs offers from: <a href="{% url 'job-list-user' job_list_detail.user_id %}">{{job_list_detail.added_by.company_name}}</a></p>
+
+		{% endif %}
+	</div>
+</div>
+
+	<br>
+	
+
+
+{% endblock content %}

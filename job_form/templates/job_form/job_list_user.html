@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<br>
+
+<div class="table-responsive">
+<table class="table table-borderless">
+	<thead>
+      
+            <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Job title</th>
+                  <th scope="col">Job describtion</th>
+                  <th scope="col">Salary</th>       
+                  <th scope="col">Job requirements</th>
+                  <th scope="col">Contract</th>
+                  <th scope="col">Experience</th>
+                  <th scope="col">Area</th>
+            </tr>
+      </thead>
+	<tbody>
+		{% for job in job_offers %}
+            <tr>
+            	
+                  <td>{{ forloop.counter }}</td>
+                  <td><a href="{% url 'job-detail' job.id %}"/>{{job.title}}</a></td>
+                  <td>{{job.job_desc}}</td>
+                  <td>{{job.min_salary}} / {{job.max_salary}} {{ job.salary_type }}</td>
+                  <td>{{job.requirements}}</td>
+                  <td>{{job.contract_type}}</td>
+                  <td>{{job.experience_type}}</td>
+                  <td>{{job.area_type}}</td>
+            	<td>
+            		<a href="{% url 'job-detail' job.id %}" class="btn btn-secondary">
+            			View details 
+            		</a>
+            	</td>
+            	
+            	
+            </tr>
+		{% endfor %}
+	</tbody>
+</table>
+</div>
+{% endblock content %}

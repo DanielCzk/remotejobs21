@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-fluid">
+	<br>
+<div class="card">
+  <div class="card-header">
+  	<img src="{{ job_company_detail.logo.url |default_if_none:'default_logo.png' }}" class="float-left" width="40" margin="5">  
+	<h4 class="float-left p-1">{{job_company_detail.company_name}}</h4>
+  </div>
+  <div class="card-body">
+	<h5 class="card-title">Adress: </h5>
+	<p class="card-text lead">{{job_company_detail.country}} / {{job_company_detail.city}}</p>
+	<hr>
+	<h5 class="card-title">Company size:</h5>
+		<p class="card-text lead">
+			{{job_company_detail.company_size}}
+		</p>
+	<hr>
+	<h5 class="card-title">About:</h5>
+	<p class="card-text lead">{{job_company_detail.bio}}</p>
+	<hr>
+	<br>
+
+			<a href="{% url 'company-list-offers' user.id %}" class="btn btn-success btn-lg">Offers</a>    
+
+</div>
+
+
+{% endblock content %}

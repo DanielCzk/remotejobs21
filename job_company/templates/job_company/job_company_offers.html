@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="container-fluid">
+    <br>
+                        {% for jobs in offers %}
+      
+                                        <div class="card bg-light text-dark">
+                                            <div class="card-body">
+                                                <img src="{{ jobs.added_by.logo.url |default_if_none:'default_logo.png' }}" class="img-tumbnail" width="40" float="left">   
+                                                <h4 class="card-title d-inline"><a href="{% url 'job-detail' jobs.id %}">{{jobs.title}}</a></h4> |
+                                                <p class="card-text d-inline">{{jobs.min_salary}} - {{jobs.max_salary}} {{jobs.salary_type}}</p> |
+                                                <p class="card-text d-inline ">{{jobs.experience_type}}</p> |
+                                                <p class="card-text d-inline ">{{jobs.area_type}}</p> |
+                   
+                                           <p class="card-text d-inline"><a href="{% url 'company-detail' jobs.added_by.id %}" class=" text-success font-italic">{{jobs.added_by.company_name}}</a></p>
+                                   
+                                    
+                                                <a href="{% url 'job-detail' jobs.id %}" class="btn btn-secondary btn-sm float-right">View details</a>
+                                            </div>
+                                        </div>  
+                                        <br>
+                                               
+                        {% endfor %}
+ </div>
+
+{% endblock content %}

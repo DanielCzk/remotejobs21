@@ -2,43 +2,31 @@
 {% block content %}
 <br>
 
-<div class="table-responsive">
-<table class="table table-borderless">
-	<thead>
-      
-            <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Job title</th>
-                  <th scope="col">Job describtion</th>
-                  <th scope="col">Salary</th>       
-                  <th scope="col">Job requirements</th>
-                  <th scope="col">Contract</th>
-                  <th scope="col">Experience</th>
-                  <th scope="col">Area</th>
-            </tr>
-      </thead>
-	<tbody>
+<div class="container-fluid">
 		{% for job in job_offers %}
-            <tr>
-            	
-                  <td>{{ forloop.counter }}</td>
-                  <td><a href="{% url 'job-detail' job.id %}"/>{{job.title}}</a></td>
-                  <td>{{job.job_desc}}</td>
-                  <td>{{job.min_salary}} / {{job.max_salary}} {{ job.salary_type }}</td>
-                  <td>{{job.requirements}}</td>
-                  <td>{{job.contract_type}}</td>
-                  <td>{{job.experience_type}}</td>
-                  <td>{{job.area_type}}</td>
-            	<td>
-            		<a href="{% url 'job-detail' job.id %}" class="btn btn-secondary">
-            			View details 
-            		</a>
-            	</td>
-            	
-            	
-            </tr>
+
+
+
+
+
+                                        <div class="card bg-light text-dark">
+                                            <div class="card-body">
+                                                <img src="{{ job.added_by.logo.url |default_if_none:'default_logo.png' }}" class="img-tumbnail" width="40" float="left">   
+                                                <h4 class="card-title d-inline"><a href="{% url 'job-detail' job.id %}">{{job.title}}</a></h4> |
+                                                <p class="card-text d-inline">{{job.min_salary}} - {{job.max_salary}} {{jobs.salary_type}}</p> |
+                                                <p class="card-text d-inline ">{{job.experience_type}}</p> |
+                                                <p class="card-text d-inline ">{{job.area_type}}</p> |
+                   
+                                           <p class="card-text d-inline"><a href="{% url 'company-detail' job.added_by.id %}" class=" text-success font-italic">{{job.added_by.company_name}}</a></p>
+                                   
+                                    
+                                                <a href="{% url 'job-detail' job.id %}" class="btn btn-secondary btn-sm float-right">View details</a>
+                                            </div>
+                                        </div>  
+                                        <br>
+
+
+
 		{% endfor %}
-	</tbody>
-</table>
 </div>
 {% endblock content %}

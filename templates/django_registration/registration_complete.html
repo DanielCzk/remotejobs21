@@ -2,5 +2,14 @@
 
 
 {% block content %}
-<p>"You are now registered. Activation email sent.</p>
+<br>
+
+<div class="container-fluid">
+<br>
+<div class="text-center">
+  <h1>You are now registered!</h1>
+  <a href="{% url 'company-create' %}" class="text-center">Add company data first</a>
+</div> 
+</div>
+<br>
 {% endblock %}
